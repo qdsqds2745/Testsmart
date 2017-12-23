@@ -20,7 +20,7 @@
 		<!-- 开发环境 -->
 		<profile>
 			<id>dev</id>
-			<properties>
+			<properties> 
 				<env>dev</env>
 				<log.level>debug</log.level>
 				<log.url>${catalina.home}/logs</log.url>
