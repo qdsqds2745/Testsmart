@@ -2,17 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.smart.sso.server.dao.DatabaseDao">
 
-<select id="">
+<select id="queryTablesBydbName" resultMap="databaseMap" parameterType="Database">
 
-select table_name as tableName from information_schema.tables where table_schema=#{dbName} <!-- and table_type='base table'; -->
+select  table_name as tableName ,table_comment tableAnnotation from information_schema.tables where table_schema=#{dbName} <!-- and table_type='base table'; -->
 
 
-<!-- 查询指定数据库中指定表的所有字段名column_name -->
-select column_name from information_schema.columns where table_schema='csdb' and table_name='users'
+<!-- 查询指定数据库中指定表的所有字段名column_name 
+select column_name from information_schema.columns where table_schema='csdb' and table_name='users'-->
 
 </select>
 
+<resultMap type="Database" id="databaseMap">
 
+<id property="id" column="id" />
+<result property="dbName" column="dbName"/>
+<association property="tables" resultMap="dBTableMap" />
+
+</resultMap>
+
+<resultMap type="DBTable" id="dBTableMap">
+<id property="id" column="id" />
+<result property="tableName" column="tableName"/>
+<result property="tableAnnotation" column="tableAnnotation"/>
+</resultMap>
 
 <!-- 	<select id="get" parameterType="java.lang.Integer" resultType="App">
      	SELECT * 

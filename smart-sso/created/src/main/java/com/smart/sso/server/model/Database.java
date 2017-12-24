@@ -12,6 +12,8 @@ public class Database extends PersistentObject{
 	private String dbName; //数据库名
 	
 	private List<DBTable>  tables;//表名
+	
+	
 
 	public String getDbName() {
 		return dbName;
@@ -27,6 +29,11 @@ public class Database extends PersistentObject{
 
 	public void setTables(List<DBTable> tables) {
 		this.tables = tables;
+	}
+
+	@Override
+	public String toString() {
+		return "Database [dbName=" + dbName + ", tables=" + tables + "]";
 	}
 	
 	

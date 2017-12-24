@@ -38,5 +38,10 @@ public class DBTable extends PersistentObject{
 		this.colums = colums;
 	}
 
+	@Override
+	public String toString() {
+		return "DBTable [tableName=" + tableName + ", tableAnnotation=" + tableAnnotation + ", colums=" + colums + "]";
+	}
+
 	
 }
