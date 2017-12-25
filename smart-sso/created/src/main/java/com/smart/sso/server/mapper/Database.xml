@@ -4,7 +4,7 @@
 
 <select id="queryTablesBydbName" resultMap="databaseMap" parameterType="Database">
 
-select  table_name as tableName ,table_comment tableAnnotation from information_schema.tables where table_schema=#{dbName} <!-- and table_type='base table'; -->
+select  table_name as tableName ,table_comment as tableAnnotation from information_schema.tables where table_schema=#{dbName} <!-- and table_type='base table'; -->
 
 
 <!-- 查询指定数据库中指定表的所有字段名column_name 
@@ -24,7 +24,24 @@ select column_name from information_schema.columns where table_schema='csdb' and
 <id property="id" column="id" />
 <result property="tableName" column="tableName"/>
 <result property="tableAnnotation" column="tableAnnotation"/>
+<association property="colums" resultMap="columnMap" />
 </resultMap>
+
+<resultMap type="Column" id="columnMap">
+<id property="id" column="id" />
+<result property="columName" column="column_name"/>
+<result property="columAnnotation" column="column_comment"/>
+<result property="columType" column="data_type"/>
+</resultMap>
+
+<select id="queryColumnByTableName" parameterType="DBTable" resultMap="dBTableMap">
+
+SELECT table_name as tableName, column_name,column_comment,data_type FROM
+ information_schema.columns WHERE 
+
+table_name=#{tableName}
+</select>
+
 
 <!-- 	<select id="get" parameterType="java.lang.Integer" resultType="App">
      	SELECT * 

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.smart.sso.server.model.DBTable;
 import com.smart.sso.server.model.Database;
 import com.smart.sso.server.service.DatabaseService;
 
@@ -35,6 +36,15 @@ public class DataBaseJUnit {
 		Database db = new Database();
 		db.setDbName("smart-sso");
 		Database db2 =	databaseService.queryTablesBydbName(db);
+		System.out.println(db2);
+		
+	}@Test
+	public void dataTables(){
+		
+		DatabaseService	databaseService  =	(DatabaseService) ac.getBean("databaseService");
+		DBTable db = new DBTable();
+		db.setTableName("sys_app");
+		DBTable db2 =	databaseService.queryColumnByTableName(db);
 		System.out.println(db2);
 		
 	}

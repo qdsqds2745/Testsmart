@@ -30,6 +30,11 @@ public class Column extends PersistentObject{
 	public void setColumType(String columType) {
 		this.columType = columType;
 	}
+	@Override
+	public String toString() {
+		return "Column [columName=" + columName + ", columAnnotation=" + columAnnotation + ", columType=" + columType
+				+ "]";
+	}
 	
 	
 	
