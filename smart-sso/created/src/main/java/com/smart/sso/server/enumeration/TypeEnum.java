@@ -2,7 +2,7 @@ package com.smart.sso.server.enumeration;
 
 public enum TypeEnum {
 
-	INT("int","int") ,BIT("String","bit"),VARCHAR("String","varchar"),CHAR("String","char"),datetime("Date","datetime");
+	INT("int","int") ,BIT("String","bit"),VARCHAR("String","varchar"),CHAR("String","char"),datetime("String","datetime");
 	
 	
 	private String javaType;
@@ -11,11 +11,11 @@ public enum TypeEnum {
 
 
 	
-	public String getJavaType(String dbType){
+	public static String getJavaType(String dbType){
 		
 		for (TypeEnum type : TypeEnum.values()) {
 			
-			if(type.equals(dbType)){
+			if(type.dbType.equals(dbType)){
 				
 				return type.javaType;
 			}

@@ -1,5 +1,8 @@
 package com.smart.sso.server.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +12,7 @@ import com.smart.sso.server.dao.DatabaseDao;
 import com.smart.sso.server.model.DBTable;
 import com.smart.sso.server.model.Database;
 import com.smart.sso.server.service.DatabaseService;
+import com.smart.sso.server.util.CreatedClassContentUtil;
 import com.smart.sso.server.util.CreatedFileUtil;
 @Service("databaseService")
 public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Integer> implements DatabaseService{
@@ -32,8 +36,9 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 	 */
 	@Override
 	public DBTable queryColumnByTableName(DBTable model){
-		
-		return dao.queryColumnByTableName( model);
+		DBTable dbTable = dao.queryColumnByTableName( model);
+		createdFile(dbTable);
+		return dbTable;
 	}
 	/**
 	 * DBTable [tableName=null, tableAnnotation=null, 
@@ -46,11 +51,11 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 
 	 */
 	/**
-	 * 转入一个表的字段集合 生成相应的文件
+	 * 转入一个表的字段集合 生成相应的文件  DBTable dbTable,String path,String packagePath
 	 */
-	public void createdFile(DBTable dbTable,String path,String packagePath){
+	public void createdFile(DBTable dbTable){
 		String filePath = "D:/javaCreated/";
-		String javaPackage = "com/tcb/created/model/";
+		String javaPackage = "com"+File.separator+"tcb"+File.separator+"created"+File.separator+"model"+File.separator+"";
 		//dbTable 表
 		//1.获取表名  生成类名
 	      String javaName = StringUtils.captureName(dbTable.getTableName());
@@ -58,7 +63,8 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 		//2生成Java类
 	      CreatedFileUtil.createFile(new StringBuffer(filePath).append(javaPackage).toString(), javaName, "java");
 		//3生成要写入的相关信息
-		
+	      CreatedClassContentUtil.CreatedClassContent(javaPackage,dbTable,javaName);
+	      
 		//4写入相关信息
 		
 		//
@@ -67,6 +73,21 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 		
 		
 	}
-	
+	public static void main(String[] args) {
+		File file = new File("D:\\javacreated\\f");
+		//File file = new File("D:\\c");
+		//		if (!file.exists()) {
+//			
+			try {
+				 file.mkdirs();
+				file.createNewFile();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		//	}
+			
+		}
+		
+	}
 	
 }
