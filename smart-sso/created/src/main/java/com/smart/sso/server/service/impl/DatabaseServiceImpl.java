@@ -9,6 +9,7 @@ import com.smart.sso.server.dao.DatabaseDao;
 import com.smart.sso.server.model.DBTable;
 import com.smart.sso.server.model.Database;
 import com.smart.sso.server.service.DatabaseService;
+import com.smart.sso.server.util.CreatedFileUtil;
 @Service("databaseService")
 public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Integer> implements DatabaseService{
 
@@ -48,16 +49,17 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 	 * 转入一个表的字段集合 生成相应的文件
 	 */
 	public void createdFile(DBTable dbTable,String path,String packagePath){
-		String filePath = "D:/";
+		String filePath = "D:/javaCreated/";
+		String javaPackage = "com/tcb/created/model/";
 		//dbTable 表
 		//1.获取表名  生成类名
 	      String javaName = StringUtils.captureName(dbTable.getTableName());
 		
 		//2生成Java类
+	      CreatedFileUtil.createFile(new StringBuffer(filePath).append(javaPackage).toString(), javaName, "java");
+		//3生成要写入的相关信息
 		
-		//3写入类型等相关信息
-		
-		//
+		//4写入相关信息
 		
 		//
 		//
