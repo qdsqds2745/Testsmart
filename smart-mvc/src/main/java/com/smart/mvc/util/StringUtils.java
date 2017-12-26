@@ -39,22 +39,21 @@ public class StringUtils {
 		}
 		return true;
 	}
-	
 
 	/**
 	 * Description:验证字符串数组是否为空
 	 * 
 	 * @author 唐海洋
-	 * @Version 1.0 2016-7-21下午5:34:41 
+	 * @Version 1.0 2016-7-21下午5:34:41
 	 * @param css
 	 * @return
 	 */
-	public static boolean isBlank(final CharSequence ... css) {
+	public static boolean isBlank(final CharSequence... css) {
 		if (css == null)
 			return true;
-		
+
 		for (CharSequence cs : css) {
-			if(isNotBlank(cs)) {
+			if (isNotBlank(cs)) {
 				return false;
 			}
 		}
@@ -209,15 +208,13 @@ public class StringUtils {
 			if (step > str.length()) {
 				list = new ArrayList<String>(1);
 				list.add(str);
-			}
-			else {
+			} else {
 				list = new ArrayList<String>();
 
 				int i = 0;
 				do {
 					list.add(str.substring(i, i += step));
-				}
-				while ((i + step) < str.length());
+				} while ((i + step) < str.length());
 
 				if (i < str.length()) {
 					list.add(str.substring(i, str.length()));
@@ -227,4 +224,22 @@ public class StringUtils {
 		}
 		return null;
 	}
+
+	/**
+	 * 数据库表名转Java类名
+	 * @param name
+	 * @return
+	 */
+	public static String captureName(String name) {
+		String[] d = name.split("_");
+		StringBuffer sb = new StringBuffer();
+		for (String string : d) {
+			char[] cs = string.toCharArray();
+			cs[0] -= 32;
+			sb.append(cs);
+		}
+		return sb.toString();
+
+	}
+
 }

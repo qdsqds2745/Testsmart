@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smart.mvc.service.mybatis.impl.ServiceImpl;
+import com.smart.mvc.util.StringUtils;
 import com.smart.sso.server.dao.DatabaseDao;
 import com.smart.sso.server.model.DBTable;
 import com.smart.sso.server.model.Database;
@@ -47,8 +48,10 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 	 * 转入一个表的字段集合 生成相应的文件
 	 */
 	public void createdFile(DBTable dbTable,String path,String packagePath){
+		String filePath = "D:/";
 		//dbTable 表
-		//1.获取表名
+		//1.获取表名  生成类名
+	      String javaName = StringUtils.captureName(dbTable.getTableName());
 		
 		//2生成Java类
 		

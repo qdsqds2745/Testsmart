@@ -4,7 +4,7 @@
 
 <select id="queryTablesBydbName" resultMap="databaseMap" parameterType="Database">
 
-select  table_name as tableName ,table_comment as tableAnnotation from information_schema.tables where table_schema=#{dbName} <!-- and table_type='base table'; -->
+select  table_name as tableName ,table_comment tableAnnotation from information_schema.tables where table_schema=#{dbName} <!-- and table_type='base table'; -->
 
 
 <!-- 查询指定数据库中指定表的所有字段名column_name 
@@ -41,6 +41,7 @@ SELECT table_name as tableName, column_name,column_comment,data_type FROM
 
 table_name=#{tableName}
 </select>
+
 
 
 <!-- 	<select id="get" parameterType="java.lang.Integer" resultType="App">
