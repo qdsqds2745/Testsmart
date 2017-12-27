@@ -1,8 +1,8 @@
-package com.smart.sso.server.enumeration;
+package com.smart.sso.server.enums;
 
 public enum TypeEnum {
 
-	INT("int","int") ,BIT("String","bit"),VARCHAR("String","varchar"),CHAR("String","char"),datetime("String","datetime");
+	INT("int","int") ,BIT("boolean","bit"),VARCHAR("String","varchar"),CHAR("String","char"),datetime("String","datetime");
 	
 	
 	private String javaType;
