@@ -27,21 +27,33 @@ public class CreatedFileUtil {
 	 */
 	public static boolean createFile(String fileName, String filecontent,String type) {
 		Boolean bool = false;
-		filenameTemp = path + fileName + "."+type;// 文件路径+名称+文件类型
-		File file = new File(filenameTemp);
+		// 文件路径+名称+文件类型
+		
+		File file = new File(fileName);
 		try {
 			// 如果文件不存在，则创建新的文件
 			if (!file.exists()) {
-				file.createNewFile();
-				bool = true;
-				System.out.println("success create file,the file is " + filenameTemp);
-				// 创建文件成功后，写入内容到文件里
-				writeFileContent(filenameTemp, filecontent);
+				 file.mkdirs();
 			}
+			bool = true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 
+		File fileTypt = new File(fileName+filecontent+"."+type);
+		try {
+			// 如果文件不存在，则创建新的文件
+			if (!fileTypt.exists()) {
+				fileTypt.createNewFile();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		
 		return bool;
 	}
 	

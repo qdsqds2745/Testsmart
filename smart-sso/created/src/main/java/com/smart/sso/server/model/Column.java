@@ -1,5 +1,7 @@
 package com.smart.sso.server.model;
 
+
+
 import com.smart.mvc.model.PersistentObject;
 
 public class Column extends PersistentObject{
