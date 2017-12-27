@@ -59,6 +59,7 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 	      CreatedFileUtil.createFile(new StringBuffer(filePath).append(javaPackage).toString(), javaName, "java");
 		//3生成要写入的相关信息
 		
+	      
 		//4写入相关信息
 		
 		//
