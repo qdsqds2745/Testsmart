@@ -55,20 +55,22 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseDao, Database, Inte
 	 */
 	public void createdFile(DBTable dbTable){
 		String filePath = "D:/javaCreated/";
+		String daoPackage = "com"+File.separator+"tcb"+File.separator+"created"+File.separator+"dao"+File.separator+"";
 		String javaPackage = "com"+File.separator+"tcb"+File.separator+"created"+File.separator+"model"+File.separator+"";
 		//dbTable 表
-		//1.获取表名  生成类名
+		//1.1获取表名  生成类名
 	      String javaName = StringUtils.captureName(dbTable.getTableName());
 		
-		//2生成Java类
+		//1.2生成Java类
 	      CreatedFileUtil.createFile(new StringBuffer(filePath).append(javaPackage).toString(), javaName, "java");
-		//3生成要写入的相关信息
-
-	      CreatedClassContentUtil.CreatedClassContent(javaPackage,dbTable,javaName);
-
-	      
-		//4写入相关信息
-		
+		//1.3生成要写入的java类中相关信息并写入
+	      CreatedClassContentUtil.CreatedClassContent(javaPackage,dbTable,javaName);	      
+		//2.1生成 dao映射的 mybatis.xml文件
+		String xmlPackage = "com"+File.separator+"tcb"+File.separator+"created"+File.separator+"mapper"+File.separator+"";
+		//2.2创建xml文件
+		CreatedFileUtil.createFile(new StringBuffer(filePath).append(xmlPackage).toString(), javaName, "xml");
+		//2.3生成要写入的mybatis.xml中相关信息并写入
+		CreatedClassContentUtil.CreatedMybatisXmlContent(xmlPackage,dbTable,javaName,daoPackage);
 		//
 		//
 		

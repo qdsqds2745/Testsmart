@@ -241,5 +241,12 @@ public class StringUtils {
 		return sb.toString();
 
 	}
+	public static String  firstCapital(String string){
+		char[] cs = string.toCharArray();
+		cs[0] -= 32;
+		return String.valueOf(cs);
+	}
+	
+	
 
 }
